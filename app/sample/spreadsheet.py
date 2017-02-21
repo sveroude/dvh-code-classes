@@ -44,6 +44,18 @@ def newCodeClass():
     else:
         return render_template('new-code-class.html')
 
+@app.route('/code-class/<id>/delete/', methods=['GET', 'POST'])
+def deleteCodeClass(id):
+    codeClasses = sheet.get_all_records()
+    codeClass = sheet.find(id).row
+    classId = codeClass - 2
+    codeClassToDelete = codeClasses[classId]
+    if request.method == 'POST':
+        sheet.delete_row(codeClass)
+        return redirect(url_for('codeClasses'))
+    else:
+        return render_template('delete-code-class.html', codeClass = codeClassToDelete)
+
 # if the script gets executed within the Python interpreter (and not as
 # imported module)
 if __name__ == '__main__':
