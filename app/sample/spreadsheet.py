@@ -19,6 +19,13 @@ def codeClasses():
     codeClasses = sheet.get_all_records()
     return render_template('code-classes.html', codeClasses = codeClasses)
 
+@app.route('/code-class/<id>/')
+def codeClass(id):
+    codeClasses = sheet.get_all_records()
+    classId = sheet.find(id).row - 2
+    codeClass = codeClasses[classId]
+    return render_template('code-class.html', codeClass = codeClass)
+
 # if the script gets executed within the Python interpreter (and not as
 # imported module)
 if __name__ == '__main__':
