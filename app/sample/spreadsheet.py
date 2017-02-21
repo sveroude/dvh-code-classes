@@ -26,6 +26,24 @@ def codeClass(id):
     codeClass = codeClasses[classId]
     return render_template('code-class.html', codeClass = codeClass)
 
+@app.route('/code-class/new/', methods=['GET', 'POST'])
+def newCodeClass():
+    if request.method == 'POST':
+        row = sheet.row_count
+        newRow = row + 1
+        codeClass = [
+            request.form['title'],
+            row,
+            request.form['date'],
+            request.form['speaker'],
+            request.form['description']
+        ]
+
+        sheet.insert_row(codeClass, newRow)
+        return redirect(url_for('codeClasses'))
+    else:
+        return render_template('new-code-class.html')
+
 # if the script gets executed within the Python interpreter (and not as
 # imported module)
 if __name__ == '__main__':
