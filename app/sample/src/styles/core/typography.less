@@ -1,0 +1,45 @@
+html {
+   font-size: 100%;
+}
+
+* {
+	quotes: '\201C' '\201D' '\2018' '\2019';
+}
+
+body {
+	font-family: @serif;
+	line-height: 1.6;
+	-webkit-text-size-adjust: 100%; // iOS specific
+	font-feature-settings: "kern", "liga";
+	-webkit-font-smoothing: antialiased; // webkit/apple-specific
+	color: @brand-default;
+	background-color: @white;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+	font-family: @sans-serif;
+	color: @brand-default;
+	margin: 0;
+	padding: 0;
+	line-height: 1.1;
+}
+
+h1, .h1 {
+	font-weight: 300;
+	font-size: 2.25rem;
+}
+
+h2, .h2 {
+	font-weight: 600;
+	font-size: 1.25rem;
+	margin-bottom: @margin-default;
+}
+
+p {
+	margin: 0 0 @margin-default;
+
+	& + p:last-child {
+		margin-bottom: 0;
+	}
+}

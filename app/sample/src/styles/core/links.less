@@ -1,0 +1,34 @@
+a, .link {
+	color: inherit;
+	text-decoration: none;
+	transition: color 250ms ease;
+
+  svg {
+    vertical-align: middle;
+  }
+
+  path {
+    transition: fill 250ms ease;
+  }
+ 
+	&:visited {
+		color: inherit;
+	}
+
+	&:focus,
+	&:hover {
+		color: @brand-alt;
+
+    & * {
+			color: inherit;
+		}
+
+    path {
+      fill: @brand-alt;
+    }
+	}
+}
+
+.link-text {
+  vertical-align: middle;
+}
