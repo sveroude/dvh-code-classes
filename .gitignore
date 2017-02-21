@@ -1,0 +1,11 @@
+# vendor packages
+app/sample/node_modules
+
+# project meta
+.idea
+.settings
+*.sublime-project
+*.sublime-workspace
+
+npm-debug.log
+.DS_Store
