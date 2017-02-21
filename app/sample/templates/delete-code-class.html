@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Voorhoede Code Classes</title>
+    <title>Voorhoede Code Class - Delete</title>
   </head>
   <body>
 
@@ -16,16 +16,13 @@
 
     <main>
 
-      {% for codeClass in codeClasses %}
-      <a class="code-class" href="{% print url_for('codeClass', id = codeClass.id) %}">
-        <article>
-          <h1>{{ codeClass.title }}</h1>
-          <span>{{ codeClass.date }}</span>
-        </article>
-      </a>
-      {% endfor %}
-
-      <a class="button" href="{% print url_for('newCodeClass') %}">Create new code class</a>
+      <form action="{{ url_for('deleteCodeClass', id = codeClass.id) }}" method='post'>
+        <fieldset>
+          <legend>Are you sure you want to delete {{ codeClass.title }}</legend>
+          <input class="button" type="submit" value="Delete">
+          <a href="{{ url_for('codeClass', id = codeClass.id) }}">Cancel</a>
+        </fieldset>
+      </form>
 
     </main>
 

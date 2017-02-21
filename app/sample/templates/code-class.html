@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Voorhoede Code Classes</title>
+    <title>Voorhoede Code Class - {{ codeClass.title }}</title>
   </head>
   <body>
 
@@ -16,16 +16,16 @@
 
     <main>
 
-      {% for codeClass in codeClasses %}
-      <a class="code-class" href="{% print url_for('codeClass', id = codeClass.id) %}">
-        <article>
-          <h1>{{ codeClass.title }}</h1>
-          <span>{{ codeClass.date }}</span>
-        </article>
-      </a>
-      {% endfor %}
+      <article class="code-class">
+        <h1>{{ codeClass.title }}</h1>
+        <span>{{ codeClass.date }} - </span>
+        <span>by {{ codeClass.speaker }}</span>
+        <p class="code-class-description">{{ codeClass.description }}</p>
+        <a href="{% print url_for('editCodeClass', id = codeClass.id) %}">Edit this code class</a>
+        <a href="{% print url_for('deleteCodeClass', id = codeClass.id) %}">Delete this code class</a>
+      </article>
 
-      <a class="button" href="{% print url_for('newCodeClass') %}">Create new code class</a>
+      <a href="{{ url_for('codeClasses') }}">Back to all code classes</a>
 
     </main>
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Voorhoede Code Classes</title>
+    <title>Voorhoede Code Class - Edit</title>
   </head>
   <body>
 
@@ -16,16 +16,26 @@
 
     <main>
 
-      {% for codeClass in codeClasses %}
-      <a class="code-class" href="{% print url_for('codeClass', id = codeClass.id) %}">
-        <article>
-          <h1>{{ codeClass.title }}</h1>
-          <span>{{ codeClass.date }}</span>
-        </article>
-      </a>
-      {% endfor %}
+      <form action="{{ url_for('editCodeClass', id = codeClass.id) }}" method='post'>
+        <fieldset>
+          <legend>Edit code class</legend>
 
-      <a class="button" href="{% print url_for('newCodeClass') %}">Create new code class</a>
+          <label for="title">Title:</label>
+          <input id="title" type="text" name="title" placeholder="{{ codeClass.title }}">
+
+          <label for="date">Date:</label>
+          <input id="date" type="text" name="date" placeholder="{{ codeClass.date }}">
+
+          <label for="speaker">Speaker:</label>
+          <input id="speaker" type="text" name="speaker" placeholder="{{ codeClass.speaker }}">
+
+          <label for="description">Description:</label>
+          <textarea id="description" type="text" name="description" placeholder="{{ codeClass.description }}"></textarea>
+
+          <button class="button" type="submit">Edit</button>
+          <a href="{{ url_for('codeClass', id = codeClass.id) }}">Cancel</a>
+        </fieldset>
+      </form>
 
     </main>
 
