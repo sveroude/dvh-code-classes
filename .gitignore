@@ -9,3 +9,8 @@ app/sample/node_modules
 
 npm-debug.log
 .DS_Store
+
+# compiled python source files
+*.pyc
+
+app/sample/static
