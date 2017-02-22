@@ -74,6 +74,10 @@ def deleteCodeClass(id):
     else:
         return render_template('delete-code-class.html', codeClass = codeClassToDelete)
 
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('page_not_found.html'), 404
+
 # if the script gets executed within the Python interpreter (and not as
 # imported module)
 if __name__ == '__main__':
