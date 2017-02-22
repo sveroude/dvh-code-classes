@@ -34,8 +34,8 @@ def newCodeClass():
         codeClass = [
             request.form['title'],
             row,
-            request.form['date'],
             request.form['speaker'],
+            request.form['date'],
             request.form['description']
         ]
 
@@ -43,6 +43,24 @@ def newCodeClass():
         return redirect(url_for('codeClasses'))
     else:
         return render_template('new-code-class.html')
+
+@app.route('/code-class/<id>/edit/', methods=['GET', 'POST'])
+def editCodeClass(id):
+    codeClasses = sheet.get_all_records()
+    row = sheet.find(id).row
+    classId = row - 2
+    codeClassToEdit = codeClasses[classId]
+
+    if request.method == 'POST':
+        print codeClassToEdit
+        sheet.update_cell(row, 1, request.form['title'])
+        sheet.update_cell(row, 3, request.form['speaker'])
+        sheet.update_cell(row, 4, request.form['date'])
+        sheet.update_cell(row, 5, request.form['description'])
+
+        return redirect(url_for('codeClass', id = id))
+    else:
+        return render_template('edit-code-class.html', codeClass = codeClassToEdit)
 
 @app.route('/code-class/<id>/delete/', methods=['GET', 'POST'])
 def deleteCodeClass(id):
