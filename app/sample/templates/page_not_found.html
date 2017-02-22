@@ -1,0 +1,15 @@
+{% extends "_base.html" %}
+{% from 'components/header/header.html' import header %}
+
+{% block header %}
+{{ header() }}
+{% endblock %}
+
+{% block content %}
+
+    <h1>Oops!</h1>
+
+    <p>We can't seem to find the page you're looking for...</p>
+    <p>Head back <a href="{{ url_for('codeClasses') }}">home</a>.
+
+{% endblock %}
