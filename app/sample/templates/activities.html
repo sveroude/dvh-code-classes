@@ -1,0 +1,47 @@
+{% extends "_base.html" %}
+{% from 'components/header/header.html' import header %}
+
+{% block header %}
+{{ header() }}
+{% endblock %}
+
+{% block content %}
+
+  <section class="activity">
+
+    <h1 class="activity__title">Code Classes</h1>
+
+    {% for codeClass in codeClasses %}
+      <article class="item">
+        <span class="item__meta">{{ codeClass.date }}</span>
+        <h1 class="item__title">
+          <a href="{% print url_for('codeClass', id = codeClass.id) %}">{{ codeClass.title }}</a>
+        </h1>
+        <span class="item__meta">by {{ codeClass.speaker }}</span>
+      </article>
+    {% endfor %}
+
+    <a href="{% print url_for('newCodeClass') %}">
+      <svg style="width:20px;height:20px" viewBox="0 0 24 24">
+        <path fill="#12353C" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+      </svg>
+      <span class="link-text">Create new code class</span>
+    </a>
+
+  </section>
+
+  <section class="activity">
+
+    <h1 class="activity__title">Code Talks</h1>
+
+    {% for codeTalk in codeTalks %}
+      <article class="item">
+        <span class="item__meta">{{ codeTalk.date }}</span>
+        <h1 class="item__title">{{ codeTalk.title }}</h1>
+        <span class="item__meta">by {{ codeTalk.speaker }}</span>
+      </article>
+    {% endfor %}
+
+  </section>
+
+{% endblock %}

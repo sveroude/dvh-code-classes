@@ -11,25 +11,27 @@ creds = ServiceAccountCredentials.from_json_keyfile_name('client_secret.json', s
 # login to Google API using OAuth2 credentials
 client = gspread.authorize(creds)
 # open spreadsheet by its title
-sheet = client.open("dvh-code-classes").sheet1
+codeClassRecords = client.open("dvh-activities").worksheet('code-classes')
+codeTalkRecords = client.open("dvh-activities").worksheet('code-talks')
 
 @app.route('/')
-@app.route('/code-classes/')
+@app.route('/activities/')
 def codeClasses():
-    codeClasses = sheet.get_all_records()
-    return render_template('code-classes.html', codeClasses = codeClasses)
+    codeClasses = codeClassRecords.get_all_records()
+    codeTalks = codeTalkRecords.get_all_records()
+    return render_template('activities.html', codeClasses = codeClasses, codeTalks = codeTalks)
 
 @app.route('/code-class/<id>/')
 def codeClass(id):
-    codeClasses = sheet.get_all_records()
-    classId = sheet.find(id).row - 2
+    codeClasses = codeClassRecords.get_all_records()
+    classId = codeClassRecords.find(id).row - 2
     codeClass = codeClasses[classId]
     return render_template('code-class.html', codeClass = codeClass)
 
 @app.route('/code-class/new/', methods=['GET', 'POST'])
 def newCodeClass():
     if request.method == 'POST':
-        row = sheet.row_count
+        row = codeClassRecords.row_count
         newRow = row + 1
         codeClass = [
             request.form['title'],
@@ -39,24 +41,24 @@ def newCodeClass():
             request.form['description']
         ]
 
-        sheet.insert_row(codeClass, newRow)
+        codeClassRecords.insert_row(codeClass, newRow)
         return redirect(url_for('codeClasses'))
     else:
         return render_template('new-code-class.html')
 
 @app.route('/code-class/<id>/edit/', methods=['GET', 'POST'])
 def editCodeClass(id):
-    codeClasses = sheet.get_all_records()
-    row = sheet.find(id).row
+    codeClasses = codeClassRecords.get_all_records()
+    row = codeClassRecords.find(id).row
     classId = row - 2
     codeClassToEdit = codeClasses[classId]
 
     if request.method == 'POST':
         print codeClassToEdit
-        sheet.update_cell(row, 1, request.form['title'])
-        sheet.update_cell(row, 3, request.form['speaker'])
-        sheet.update_cell(row, 4, request.form['date'])
-        sheet.update_cell(row, 5, request.form['description'])
+        codeClassRecords.update_cell(row, 1, request.form['title'])
+        codeClassRecords.update_cell(row, 3, request.form['speaker'])
+        codeClassRecords.update_cell(row, 4, request.form['date'])
+        codeClassRecords.update_cell(row, 5, request.form['description'])
 
         return redirect(url_for('codeClass', id = id))
     else:
@@ -64,12 +66,12 @@ def editCodeClass(id):
 
 @app.route('/code-class/<id>/delete/', methods=['GET', 'POST'])
 def deleteCodeClass(id):
-    codeClasses = sheet.get_all_records()
-    codeClass = sheet.find(id).row
+    codeClasses = codeClassRecords.get_all_records()
+    codeClass = codeClassRecords.find(id).row
     classId = codeClass - 2
     codeClassToDelete = codeClasses[classId]
     if request.method == 'POST':
-        sheet.delete_row(codeClass)
+        codeClassRecords.delete_row(codeClass)
         return redirect(url_for('codeClasses'))
     else:
         return render_template('delete-code-class.html', codeClass = codeClassToDelete)
