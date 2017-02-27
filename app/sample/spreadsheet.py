@@ -28,54 +28,6 @@ def codeClass(id):
     codeClass = codeClasses[classId]
     return render_template('code-class.html', codeClass = codeClass)
 
-@app.route('/code-class/new/', methods=['GET', 'POST'])
-def newCodeClass():
-    if request.method == 'POST':
-        row = codeClassRecords.row_count
-        newRow = row + 1
-        codeClass = [
-            request.form['title'],
-            row,
-            request.form['speaker'],
-            request.form['date'],
-            request.form['description']
-        ]
-
-        codeClassRecords.insert_row(codeClass, newRow)
-        return redirect(url_for('codeClasses'))
-    else:
-        return render_template('new-code-class.html')
-
-@app.route('/code-class/<id>/edit/', methods=['GET', 'POST'])
-def editCodeClass(id):
-    codeClasses = codeClassRecords.get_all_records()
-    row = codeClassRecords.find(id).row
-    classId = row - 2
-    codeClassToEdit = codeClasses[classId]
-
-    if request.method == 'POST':
-        print codeClassToEdit
-        codeClassRecords.update_cell(row, 1, request.form['title'])
-        codeClassRecords.update_cell(row, 3, request.form['speaker'])
-        codeClassRecords.update_cell(row, 4, request.form['date'])
-        codeClassRecords.update_cell(row, 5, request.form['description'])
-
-        return redirect(url_for('codeClass', id = id))
-    else:
-        return render_template('edit-code-class.html', codeClass = codeClassToEdit)
-
-@app.route('/code-class/<id>/delete/', methods=['GET', 'POST'])
-def deleteCodeClass(id):
-    codeClasses = codeClassRecords.get_all_records()
-    codeClass = codeClassRecords.find(id).row
-    classId = codeClass - 2
-    codeClassToDelete = codeClasses[classId]
-    if request.method == 'POST':
-        codeClassRecords.delete_row(codeClass)
-        return redirect(url_for('codeClasses'))
-    else:
-        return render_template('delete-code-class.html', codeClass = codeClassToDelete)
-
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('page_not_found.html'), 404
