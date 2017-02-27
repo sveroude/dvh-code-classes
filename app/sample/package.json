@@ -7,7 +7,9 @@
     "build:fonts": "node tasks/copy-fonts.js",
     "build:css": "node tasks/build-css.js",
     "build:script": "node tasks/build-script.js",
-    "watch:css": "chokidar 'src/styles/**/*.less' --command 'npm run build:css'"
+    "watch": "npm-run-all --parallel watch:*",
+    "watch:css": "chokidar 'src/styles/**/*.less' --command 'npm run build:css'",
+    "watch:js": "chokidar 'src/**/*.js' --command 'npm run build:script'"
   },
   "author": "Sanne Veroude <sanne@voorhoede.nl>",
   "license": "MIT",
@@ -22,6 +24,7 @@
     "gulp-uglify": "2.0.1"
   },
   "devDependencies": {
-    "chokidar": "1.6.1"
+    "chokidar": "1.6.1",
+    "npm-run-all": "4.0.2"
   }
 }
