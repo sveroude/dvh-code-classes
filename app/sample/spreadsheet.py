@@ -19,15 +19,20 @@ def activities():
     activities = activityRecords.get_all_records()
     return render_template('activities.html', activities = activities)
 
-@app.route('/activity/<title>/')
+@app.route('/activity/<title>/', methods=['GET', 'POST'])
 def activity(title):
-    keys = activityRecords.row_values(1)
-    values = activityRecords.row_values(activityRecords.find(title).row)
-    activity = dict(zip(keys, values))
+    if request.method == 'POST':
+        row = activityRecords.find(title).row
+        rating = request.form['rating']
 
-    print activity
+        activityRecords.update_cell(row, 7, rating)
+        return redirect(url_for('activities'))
 
-    return render_template('activity.html', activity = activity)
+    else:
+        keys = activityRecords.row_values(1)
+        values = activityRecords.row_values(activityRecords.find(title).row)
+        activity = dict(zip(keys, values))
+        return render_template('activity.html', activity = activity)
 
 @app.errorhandler(404)
 def page_not_found(error):

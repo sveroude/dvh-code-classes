@@ -11,7 +11,13 @@ input {
 }
 
 fieldset {
-  padding: @margin-default @margin-half;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+legend {
+  margin: 0 0 @margin-half;
 }
 
 input,
@@ -32,10 +38,9 @@ button,
 .button {
   display: inline-block;
   border: none;
-  margin-bottom: 1em;
-  padding: 0.5rem 1rem;
-  background-color: #eddd3e;
-  color: #12353c;
+  padding: @margin-half @margin-default;
+  background-color: @brand-highlight;
+  color: @brand-default;
   font-size: 1rem;
   text-decoration: none;
 }
