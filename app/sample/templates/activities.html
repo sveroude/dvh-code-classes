@@ -7,7 +7,9 @@
 
 {% block content %}
 
-  <section class="activity">
+<div class="dragend" data-dragend>
+
+  <section class="activity dragend-page">
 
     <h1 class="activity__title">Code Classes</h1>
     {% for codeClass in codeClasses %}
@@ -21,8 +23,7 @@
     {% endfor %}
 
   </section>
-
-  <section class="activity">
+  <section class="activity dragend-page">
 
     <h1 class="activity__title">Code Talks</h1>
 
@@ -35,5 +36,7 @@
     {% endfor %}
 
   </section>
+
+</div>
 
 {% endblock %}
