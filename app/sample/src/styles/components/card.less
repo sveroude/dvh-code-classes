@@ -11,7 +11,7 @@
 
 .card__meta {
   color: @brand-downplay;
-  margin-bottom: @margin-default;
+  margin-bottom: @margin-half;
 }
 
 .card__description {
@@ -20,4 +20,13 @@
 
 .card__actions {
   margin-bottom: @margin-default;
+  font-size: 0.9em;
+
+  a {
+
+    &:first-child {
+      display: inline-block;
+      margin-right: @margin-default;
+    }
+  }
 }

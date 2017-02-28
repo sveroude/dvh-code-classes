@@ -19,14 +19,23 @@ def codeClasses():
     codeClasses = codeClassRecords.get_all_records()
     return render_template('code-classes.html', codeClasses = codeClasses)
 
-@app.route('/code-class/<title>/')
+@app.route('/code-class/<title>/', methods=['GET', 'POST'])
 def codeClass(title):
-    keys = codeClassRecords.row_values(1)
-    values = codeClassRecords.row_values(codeClassRecords.find(title).row)
-    # Create a codeClass dictionary from the keys and correct row values
-    codeClass = dict(zip(keys, values))
+    if request.method == 'POST':
+        row = codeClassRecords.find(title).row
+        rating = request.form['rating']
 
-    return render_template('code-class.html', codeClass = codeClass)
+        codeClassRecords.update_cell(row, 5, rating)
+        return redirect(url_for('codeClasses'))
+
+    else:
+        keys = codeClassRecords.row_values(1)
+        values = codeClassRecords.row_values(codeClassRecords.find(title).row)
+        # Create a codeClass dictionary from the keys and correct row values
+        codeClass = dict(zip(keys, values))
+
+        return render_template('code-class.html', codeClass = codeClass)
+
 
 @app.route('/code-class/new/', methods=['GET', 'POST'])
 def newCodeClass():
