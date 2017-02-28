@@ -9,33 +9,35 @@
 
 <div class="dragend" data-dragend>
 
-  <section class="activity dragend-page">
+    <section class="activity dragend-page">
+        <h1 class="activity__title">Code Classes</h1>
+        {% for activity in activities %}
+        {% if activity.type == 'class' %}
+        <article class="item">
+          <span class="item__meta">{{ activity.date }}</span>
+          <h1 class="item__title">
+            <a href="{% print url_for('activity', title = activity.title) %}">{{ activity.title }}</a>
+          </h1>
+          <span class="item__meta">by {{ activity.speaker }}</span>
+        </article>
+        {% endif %}
+        {% endfor %}
+    </section>
 
-    <h1 class="activity__title">Code Classes</h1>
-    {% for codeClass in codeClasses %}
-      <article class="item">
-        <span class="item__meta">{{ codeClass.date }}</span>
-        <h1 class="item__title">
-          <a href="{% print url_for('codeClass', title = codeClass.title) %}">{{ codeClass.title }}</a>
-        </h1>
-        <span class="item__meta">by {{ codeClass.speaker }}</span>
-      </article>
-    {% endfor %}
-
-  </section>
-  <section class="activity dragend-page">
-
-    <h1 class="activity__title">Code Talks</h1>
-
-    {% for codeTalk in codeTalks %}
-      <article class="item">
-        <span class="item__meta">{{ codeTalk.date }}</span>
-        <h1 class="item__title">{{ codeTalk.title }}</h1>
-        <span class="item__meta">by {{ codeTalk.speaker }}</span>
-      </article>
-    {% endfor %}
-
-  </section>
+    <section class="activity dragend-page">
+        <h1 class="activity__title">Code Talks</h1>
+        {% for activity in activities %}
+        {% if activity.type == 'talk' %}
+        <article class="item">
+          <span class="item__meta">{{ activity.date }}</span>
+          <h1 class="item__title">
+            <a href="{% print url_for('activity', title = activity.title) %}">{{ activity.title }}</a>
+          </h1>
+          <span class="item__meta">by {{ activity.speaker }}</span>
+        </article>
+        {% endif %}
+        {% endfor %}
+    </section>
 
 </div>
 

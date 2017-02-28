@@ -11,23 +11,23 @@ creds = ServiceAccountCredentials.from_json_keyfile_name('client_secret.json', s
 # login to Google API using OAuth2 credentials
 client = gspread.authorize(creds)
 # open spreadsheet by its title
-codeClassRecords = client.open("dvh-activities").worksheet('code-classes')
-codeTalkRecords = client.open("dvh-activities").worksheet('code-talks')
+activityRecords = client.open("dvh-activities").worksheet('activities')
 
 @app.route('/')
 @app.route('/activities/')
-def codeClasses():
-    codeClasses = codeClassRecords.get_all_records()
-    codeTalks = codeTalkRecords.get_all_records()
-    return render_template('activities.html', codeClasses = codeClasses, codeTalks = codeTalks)
+def activities():
+    activities = activityRecords.get_all_records()
+    return render_template('activities.html', activities = activities)
 
-@app.route('/code-class/<title>/')
-def codeClass(title):
-    keys = codeClassRecords.row_values(1)
-    values = codeClassRecords.row_values(codeClassRecords.find(title).row)
-    codeClass = dict(zip(keys, values))
+@app.route('/activity/<title>/')
+def activity(title):
+    keys = activityRecords.row_values(1)
+    values = activityRecords.row_values(activityRecords.find(title).row)
+    activity = dict(zip(keys, values))
 
-    return render_template('code-class.html', codeClass = codeClass)
+    print activity
+
+    return render_template('activity.html', activity = activity)
 
 @app.errorhandler(404)
 def page_not_found(error):
