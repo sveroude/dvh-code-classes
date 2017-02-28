@@ -14,7 +14,7 @@
       <article class="item">
         <span class="item__meta">{{ codeClass.date }}</span>
         <h1 class="item__title">
-          <a href="{% print url_for('codeClass', id = codeClass.id) %}">{{ codeClass.title }}</a>
+          <a href="{% print url_for('codeClass', title = codeClass.title) %}">{{ codeClass.title }}</a>
         </h1>
         <span class="item__meta">by {{ codeClass.speaker }}</span>
       </article>

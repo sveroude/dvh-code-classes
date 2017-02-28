@@ -19,13 +19,12 @@ codeTalkRecords = client.open("dvh-activities").worksheet('code-talks')
 def codeClasses():
     codeClasses = codeClassRecords.get_all_records()
     codeTalks = codeTalkRecords.get_all_records()
-    print codeClassRecords.col_values(2)
     return render_template('activities.html', codeClasses = codeClasses, codeTalks = codeTalks)
 
-@app.route('/code-class/<id>/')
-def codeClass(id):
+@app.route('/code-class/<title>/')
+def codeClass(title):
     keys = codeClassRecords.row_values(1)
-    values = codeClassRecords.row_values(codeClassRecords.find(id).row)
+    values = codeClassRecords.row_values(codeClassRecords.find(title).row)
     codeClass = dict(zip(keys, values))
 
     return render_template('code-class.html', codeClass = codeClass)
