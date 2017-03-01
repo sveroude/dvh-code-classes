@@ -25,8 +25,6 @@ def activity(title):
     values = activityRecords.row_values(activityRecords.find(title).row)
     activity = dict(zip(keys, values))
 
-    print activity
-
     return render_template('activity.html', activity = activity)
 
 @app.errorhandler(404)
