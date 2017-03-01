@@ -14,29 +14,6 @@
         <span>by {{ activity.speaker }}</span>
       </div>
       <p class="card__description">{{ activity.description }}</p>
-      <form action="{% print url_for('activity', title = activity.title) %}" method='post' class="rating-form">
-        <fieldset>
-          <legend class="rating-form__legend">How did you like it?</legend>
-
-          <div class="ratings">
-            <div class="rating">
-              <input id="good" value="1" type="radio" name="rating" checked>
-              <label class="rating__label" for="good">
-                <span class="rating__label-text">good</span>
-              </label>
-            </div>
-
-            <div class="rating">
-              <input id="bad" value="0" type="radio" name="rating">
-              <label class="rating__label" for="bad">
-                <span class="rating__label-text">bad</span>
-              </label>
-            </div>
-          </div>
-
-          <button class="button rating-form__button" type="submit">Give rating</button>
-        </fieldset>
-      </form>
     </article>
 
     {% if activity.type == 'class' %}
