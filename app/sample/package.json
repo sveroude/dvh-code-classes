@@ -4,10 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "run-s build start:server",
+    "start:server": "python spreadsheet.py",
     "build:fonts": "node tasks/copy-fonts.js",
     "build:css": "node tasks/build-css.js",
     "build:script": "node tasks/build-script.js",
-    "watch": "npm-run-all --parallel watch:*",
+    "build": "run-p build:*",
+    "watch": "run-p watch:*",
     "watch:css": "chokidar 'src/styles/**/*.less' --command 'npm run build:css'",
     "watch:js": "chokidar 'src/**/*.js' --command 'npm run build:script'"
   },
