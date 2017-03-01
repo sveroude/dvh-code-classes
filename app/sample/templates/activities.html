@@ -9,7 +9,7 @@
 
 <div class="dragend" data-dragend>
 
-    <section class="activity dragend-page">
+    <section class="activity dragend-page" id="classes">
         <h1 class="activity__title">Code Classes</h1>
         {% for activity in activities %}
         {% if activity.type == 'class' %}
@@ -24,7 +24,7 @@
         {% endfor %}
     </section>
 
-    <section class="activity dragend-page">
+    <section class="activity dragend-page" id="talks">
         <h1 class="activity__title">Code Talks</h1>
         {% for activity in activities %}
         {% if activity.type == 'talk' %}
