@@ -11,67 +11,69 @@ creds = ServiceAccountCredentials.from_json_keyfile_name('client_secret.json', s
 # login to Google API using OAuth2 credentials
 client = gspread.authorize(creds)
 # open spreadsheet by its title
-sheet = client.open("dvh-code-classes").sheet1
+codeClassRecords = client.open("dvh-activities").worksheet('classes')
 
 @app.route('/')
 @app.route('/code-classes/')
 def codeClasses():
-    codeClasses = sheet.get_all_records()
+    codeClasses = codeClassRecords.get_all_records()
     return render_template('code-classes.html', codeClasses = codeClasses)
 
-@app.route('/code-class/<id>/')
-def codeClass(id):
-    codeClasses = sheet.get_all_records()
-    classId = sheet.find(id).row - 2
-    codeClass = codeClasses[classId]
+@app.route('/code-class/<title>/')
+def codeClass(title):
+    keys = codeClassRecords.row_values(1)
+    values = codeClassRecords.row_values(codeClassRecords.find(title).row)
+    # Create a codeClass dictionary from the keys and correct row values
+    codeClass = dict(zip(keys, values))
+
     return render_template('code-class.html', codeClass = codeClass)
 
 @app.route('/code-class/new/', methods=['GET', 'POST'])
 def newCodeClass():
     if request.method == 'POST':
-        row = sheet.row_count
-        newRow = row + 1
-        codeClass = [
-            request.form['title'],
-            row,
-            request.form['speaker'],
-            request.form['date'],
-            request.form['description']
-        ]
+        numberOfRows = codeClassRecords.row_count
+        newRow = numberOfRows + 1
+        formData = [request.form['title'], request.form['speaker'], request.form['date'], request.form['description']]
 
-        sheet.insert_row(codeClass, newRow)
+        codeClassRecords.insert_row(formData, newRow)
         return redirect(url_for('codeClasses'))
     else:
         return render_template('new-code-class.html')
 
-@app.route('/code-class/<id>/edit/', methods=['GET', 'POST'])
-def editCodeClass(id):
-    codeClasses = sheet.get_all_records()
-    row = sheet.find(id).row
-    classId = row - 2
-    codeClassToEdit = codeClasses[classId]
-
+@app.route('/code-class/<title>/edit/', methods=['GET', 'POST'])
+def editCodeClass(title):
     if request.method == 'POST':
-        print codeClassToEdit
-        sheet.update_cell(row, 1, request.form['title'])
-        sheet.update_cell(row, 3, request.form['speaker'])
-        sheet.update_cell(row, 4, request.form['date'])
-        sheet.update_cell(row, 5, request.form['description'])
+        codeClassRow = codeClassRecords.find(title).row
+        cellList = codeClassRecords.range("B%s:E%s" % (codeClassRow, codeClassRow))
+        formData = [request.form['title'], request.form['speaker'], request.form['date'], request.form['description']]
 
-        return redirect(url_for('codeClass', id = id))
+        for i, cell in enumerate(cellList):
+            cell.value = formData[i]
+
+        codeClassRecords.update_cells(cellList)
+
+        return redirect(url_for('codeClass', title = request.form['title']))
     else:
+        keys = codeClassRecords.row_values(1)
+        values = codeClassRecords.row_values(codeClassRecords.find(title).row)
+        # Create a codeClass dictionary from the keys and correct row values
+        codeClassToEdit = dict(zip(keys, values))
+
         return render_template('edit-code-class.html', codeClass = codeClassToEdit)
 
-@app.route('/code-class/<id>/delete/', methods=['GET', 'POST'])
-def deleteCodeClass(id):
-    codeClasses = sheet.get_all_records()
-    codeClass = sheet.find(id).row
-    classId = codeClass - 2
-    codeClassToDelete = codeClasses[classId]
+@app.route('/code-class/<title>/delete/', methods=['GET', 'POST'])
+def deleteCodeClass(title):
     if request.method == 'POST':
-        sheet.delete_row(codeClass)
+        codeClass = codeClassRecords.find(title).row
+
+        codeClassRecords.delete_row(codeClass)
         return redirect(url_for('codeClasses'))
     else:
+        keys = codeClassRecords.row_values(1)
+        values = codeClassRecords.row_values(codeClassRecords.find(title).row)
+        # Create a codeClass dictionary from the keys and correct row values
+        codeClassToDelete = dict(zip(keys, values))
+
         return render_template('delete-code-class.html', codeClass = codeClassToDelete)
 
 @app.errorhandler(404)

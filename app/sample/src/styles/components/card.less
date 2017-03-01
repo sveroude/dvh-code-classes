@@ -1,6 +1,7 @@
 .card {
   display: block;
-  margin-bottom: @margin-default;
+  margin: @margin-default 0;
+  border-bottom: 2px solid @brand-highlight;
 }
 
 .card__title {
@@ -14,13 +15,9 @@
 }
 
 .card__description {
-  padding-bottom: @margin-default;
-  border-bottom: 2px solid @brand-highlight;
+  margin-bottom: @margin-double;
 }
 
 .card__actions {
-
-  a:not(:last-child) {
-    margin-right: @margin-default;
-  }
+  margin-bottom: @margin-default;
 }

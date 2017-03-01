@@ -7,11 +7,11 @@
 
 {% block content %}
 
-    <form action="{{ url_for('deleteCodeClass', id = codeClass.id) }}" method='post'>
+    <form action="{{ url_for('deleteCodeClass', title = codeClass.title) }}" method='post'>
       <fieldset>
         <legend>Are you sure you want to delete {{ codeClass.title }}</legend>
         <input class="button" type="submit" value="Delete">
-        <a href="{{ url_for('codeClass', id = codeClass.id) }}">Cancel</a>
+        <a href="{{ url_for('codeClass', title = codeClass.title) }}">Cancel</a>
       </fieldset>
     </form>
 

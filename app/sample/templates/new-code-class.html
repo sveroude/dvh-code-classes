@@ -13,16 +13,17 @@
         <label for="title">Title:</label>
         <input id="title" type="text" name="title">
 
-        <label for="date">Date:</label>
-        <input id="date" type="text" name="date">
-
         <label for="speaker">Speaker:</label>
         <input id="speaker" type="text" name="speaker">
+
+        <label for="date">Date:</label>
+        <input id="date" type="text" name="date">
 
         <label for="description">Description:</label>
         <textarea id="description" type="text" name="description"></textarea>
 
         <button class="button" type="submit">Create</button>
+        <a href="{{ url_for('codeClasses') }}">Cancel</a>
       </fieldset>
     </form>
 
