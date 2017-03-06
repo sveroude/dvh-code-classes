@@ -38,4 +38,4 @@ if __name__ == '__main__':
     # add a secret key which Flask will use to create sessions for the user
     app.secret_key = 'super_secret_key' # replace with env variable
     app.debug = True
-    app.run(host = '0.0.0.0', port = 8899)
+    app.run(host = '0.0.0.0', port = int(os.environ.get('PORT', 8000))) # default)
