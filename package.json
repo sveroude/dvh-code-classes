@@ -1,21 +1,29 @@
 {
   "name": "dvh-code-classes",
   "version": "0.0.1",
-  "description": "",
+  "description": "overview of all DVH activities",
   "main": "index.js",
   "scripts": {
     "start": "run-s build start:server",
-    "start:server": "python spreadsheet.py",
-    "build:fonts": "node tasks/copy-fonts.js",
-    "build:css": "node tasks/build-css.js",
-    "build:script": "node tasks/build-script.js",
+    "start:server": "python app/sample/spreadsheet.py",
+    "build:fonts": "node app/sample/tasks/copy-fonts.js",
+    "build:css": "node app/sample/tasks/build-css.js",
+    "build:script": "node app/sample/tasks/build-script.js",
     "build": "run-p build:*",
     "watch": "run-p watch:*",
     "watch:css": "chokidar 'src/styles/**/*.less' --command 'npm run build:css'",
     "watch:js": "chokidar 'src/**/*.js' --command 'npm run build:script'"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sveroude/dvh-code-classes.git"
+  },
   "author": "Sanne Veroude <sanne@voorhoede.nl>",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sveroude/dvh-code-classes/issues"
+  },
+  "homepage": "https://github.com/sveroude/dvh-code-classes#readme",
   "dependencies": {
     "gulp": "3.9.1",
     "gulp-autoprefixer": "3.1.1",
@@ -27,7 +35,6 @@
     "gulp-uglify": "2.0.1"
   },
   "devDependencies": {
-    "chokidar": "1.6.1",
     "chokidar-cli": "1.2.0",
     "npm-run-all": "4.0.2"
   }

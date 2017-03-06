@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 # use creds to create a client to interact with the Google Drive API
 scope = ['https://spreadsheets.google.com/feeds']
-creds = ServiceAccountCredentials.from_json_keyfile_name('client_secret.json', scope)
+creds = ServiceAccountCredentials.from_json_keyfile_name('app/sample/client_secret.json', scope)
 # login to Google API using OAuth2 credentials
 client = gspread.authorize(creds)
 # open spreadsheet by its title
