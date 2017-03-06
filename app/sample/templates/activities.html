@@ -1,0 +1,44 @@
+{% extends "_base.html" %}
+{% from 'components/header/header.html' import header %}
+
+{% block header %}
+{{ header() }}
+{% endblock %}
+
+{% block content %}
+
+<div class="dragend" data-dragend>
+
+    <section class="activity dragend-page" id="classes">
+        <h1 class="activity__title">Code Classes</h1>
+        {% for activity in activities %}
+        {% if activity.type == 'class' %}
+        <article class="item">
+          <span class="item__meta">{{ activity.date }}</span>
+          <h1 class="item__title">
+            <a href="{% print url_for('activity', title = activity.title) %}">{{ activity.title }}</a>
+          </h1>
+          <span class="item__meta">by {{ activity.speaker }}</span>
+        </article>
+        {% endif %}
+        {% endfor %}
+    </section>
+
+    <section class="activity dragend-page" id="talks">
+        <h1 class="activity__title">Code Talks</h1>
+        {% for activity in activities %}
+        {% if activity.type == 'talk' %}
+        <article class="item">
+          <span class="item__meta">{{ activity.date }}</span>
+          <h1 class="item__title">
+            <a href="{% print url_for('activity', title = activity.title) %}">{{ activity.title }}</a>
+          </h1>
+          <span class="item__meta">by {{ activity.speaker }}</span>
+        </article>
+        {% endif %}
+        {% endfor %}
+    </section>
+
+</div>
+
+{% endblock %}
