@@ -6,7 +6,7 @@ Python package to read, write, and delete data from a Google Spreadsheet.
 ## Getting started
 
 ``` bash
-`git clone git@github.com:sveroude/dvh-code-classes.git`
+git clone git@github.com:sveroude/dvh-code-classes.git
 ```
 
 ## Google Drive API and Service Accounts
@@ -48,19 +48,28 @@ Create a virtual environment:
 $ virtualenv venv
 ```
 
+Install the project requirements from the virtual environment:
+
+``` bash
+$ source venv/bin/activate
+$ pip install -r requirements.txt
+$ deactivate
+```
+
+## Development
+
+### Activate virtual environment
+
 Activate the virtual environment:
 
 ``` bash
 $ source venv/bin/activate
 ```
 
-Inside the virtual environment, install the project requirements as specified in the requirements.txt file:
+The name of the current virtual environment will now appear on the left of the
+prompt to let you know that it’s active.
 
-``` bash
-$ pip install -r ../../requirements.txt
-```
-
-## Development
+### Start
 
 Start the server:
 
@@ -68,7 +77,17 @@ Start the server:
 $ npm run start
 ```
 
+### Watch
+
 Watch LESS and JS files:
+
+``` bash
+$ npm run watch
+```
+
+### Deactivate virtual environment
+
+If you are done working in the virtual environment for the moment, you can deactivate it:
 
 ``` bash
 $ npm run watch
