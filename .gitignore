@@ -13,5 +13,6 @@ npm-debug.log
 # compiled python source files
 *.pyc
 
-app/sample/static/**
+app/sample/static
 app/sample/client_secret.json
+venv

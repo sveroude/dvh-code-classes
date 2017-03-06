@@ -1,0 +1,4 @@
+Flask==0.12
+Jinja2==2.9.5
+gspread==0.6.2
+oauth2client==4.0.0
