@@ -90,5 +90,5 @@ $ npm run watch
 If you are done working in the virtual environment for the moment, you can deactivate it:
 
 ``` bash
-$ npm run watch
+$ deactivate
 ```
