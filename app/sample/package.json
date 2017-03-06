@@ -4,9 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "run-s build start:server",
+    "start:server": "python spreadsheet.py",
     "build:fonts": "node tasks/copy-fonts.js",
     "build:css": "node tasks/build-css.js",
-    "watch:css": "chokidar 'src/styles/**/*.less' --command 'npm run build:css'"
+    "build:script": "node tasks/build-script.js",
+    "build": "run-p build:*",
+    "watch": "run-p watch:*",
+    "watch:css": "chokidar 'src/styles/**/*.less' --command 'npm run build:css'",
+    "watch:js": "chokidar 'src/**/*.js' --command 'npm run build:script'"
   },
   "author": "Sanne Veroude <sanne@voorhoede.nl>",
   "license": "MIT",
@@ -14,11 +20,15 @@
     "gulp": "3.9.1",
     "gulp-autoprefixer": "3.1.1",
     "gulp-clean-css": "3.0.3",
+    "gulp-concat": "2.6.1",
     "gulp-less": "3.3.0",
     "gulp-plumber": "1.1.0",
-    "gulp-sourcemaps": "2.4.1"
+    "gulp-sourcemaps": "2.4.1",
+    "gulp-uglify": "2.0.1"
   },
   "devDependencies": {
-    "chokidar": "1.6.1"
+    "chokidar": "1.6.1",
+    "chokidar-cli": "1.2.0",
+    "npm-run-all": "4.0.2"
   }
 }

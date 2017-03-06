@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+import os
 
 # create the application instance
 app = Flask(__name__)
@@ -35,7 +36,6 @@ def codeClass(title):
         codeClass = dict(zip(keys, values))
 
         return render_template('code-class.html', codeClass = codeClass)
-
 
 @app.route('/code-class/new/', methods=['GET', 'POST'])
 def newCodeClass():
