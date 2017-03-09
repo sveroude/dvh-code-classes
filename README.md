@@ -22,10 +22,10 @@ account and OAuth2 credentials from the Google API Console:
 - *Create credentials* for a *Web Server* to access *Application Data*.
 - Name the service account and grant it a *Project* Role of *Editor*.
 - Download the JSON file.
-- Rename the JSON file to `client_secret.json`. Copy the file and paste it the `app/sample` directory
+- Rename the JSON file to `credentials.json`. Copy the file and paste it in the root directory
 
 There is one last required step to authorize the app:
-- Find the `client_email` inside` client_secret.json`.
+- Find the `client_email` inside` credentials.json`.
 - In the spreadsheet, click the Share button in the top right.
 - Paste the client email into the People field to give it edit rights.
 - Hit Send.
