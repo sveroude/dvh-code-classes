@@ -6,7 +6,7 @@ Python package to read, write, and delete data from a Google Spreadsheet.
 ## Getting started
 
 ``` bash
-`git clone git@github.com:sveroude/dvh-code-classes.git`
+git clone git@github.com:sveroude/dvh-code-classes.git
 ```
 
 ## Google Drive API and Service Accounts
@@ -22,10 +22,10 @@ account and OAuth2 credentials from the Google API Console:
 - *Create credentials* for a *Web Server* to access *Application Data*.
 - Name the service account and grant it a *Project* Role of *Editor*.
 - Download the JSON file.
-- Rename the JSON file to `client_secret.json`. Copy the file and paste it the `app/sample` directory
+- Rename the JSON file to `credentials.json`. Copy the file and paste it in the root directory
 
 There is one last required step to authorize the app:
-- Find the `client_email` inside` client_secret.json`.
+- Find the `client_email` inside` credentials.json`.
 - In the spreadsheet, click the Share button in the top right.
 - Paste the client email into the People field to give it edit rights.
 - Hit Send.
@@ -48,19 +48,28 @@ Create a virtual environment:
 $ virtualenv venv
 ```
 
+Install the project requirements from the virtual environment:
+
+``` bash
+$ source venv/bin/activate
+$ pip install -r requirements.txt
+$ deactivate
+```
+
+## Development
+
+### Activate virtual environment
+
 Activate the virtual environment:
 
 ``` bash
 $ source venv/bin/activate
 ```
 
-Inside the virtual environment, install the project requirements as specified in the requirements.txt file:
+The name of the current virtual environment will now appear on the left of the
+prompt to let you know that it’s active.
 
-``` bash
-$ pip install -r ../../requirements.txt
-```
-
-## Development
+### Start
 
 Start the server:
 
@@ -68,8 +77,18 @@ Start the server:
 $ npm run start
 ```
 
+### Watch
+
 Watch LESS and JS files:
 
 ``` bash
 $ npm run watch
+```
+
+### Deactivate virtual environment
+
+If you are done working in the virtual environment for the moment, you can deactivate it:
+
+``` bash
+$ deactivate
 ```

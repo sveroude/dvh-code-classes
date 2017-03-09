@@ -1,5 +1,5 @@
 # vendor packages
-app/sample/node_modules
+node_modules
 
 # project meta
 .idea
@@ -14,5 +14,6 @@ npm-debug.log
 *.pyc
 
 app/sample/static
-app/sample/client_secret.json
+credentials.json
 venv
+.env

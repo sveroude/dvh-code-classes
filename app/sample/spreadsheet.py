@@ -6,9 +6,11 @@ import os
 # create the application instance
 app = Flask(__name__)
 
+SESSION_KEY = os.environ.get("SESSION_KEY")
+
 # use creds to create a client to interact with the Google Drive API
 scope = ['https://spreadsheets.google.com/feeds']
-creds = ServiceAccountCredentials.from_json_keyfile_name('client_secret.json', scope)
+creds = ServiceAccountCredentials.from_json_keyfile_name('credentials.json', scope)
 # login to Google API using OAuth2 credentials
 client = gspread.authorize(creds)
 # open spreadsheet by its title
@@ -93,6 +95,6 @@ def page_not_found(error):
 # imported module)
 if __name__ == '__main__':
     # add a secret key which Flask will use to create sessions for the user
-    app.secret_key = 'super_secret_key'
+    app.secret_key = SESSION_KEY
     app.debug = True
-    app.run(host = '0.0.0.0', port = 8899)
+    app.run(host = '0.0.0.0', port = int(os.environ.get('PORT', 8000))) # default)
