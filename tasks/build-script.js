@@ -5,8 +5,8 @@ const sourcemaps = require('gulp-sourcemaps');
 const uglify = require('gulp-uglify');
 
 const paths = module.exports = {
-	static: 'static/',
-	src: 'src/scripts/**/*.js',
+	static: 'app/sample/static/',
+	src: 'app/sample/src/scripts/**/*.js',
 };
 
 

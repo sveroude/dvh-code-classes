@@ -2,8 +2,8 @@ const gulp = require('gulp');
 const path = require('path');
 
 const paths = module.exports = {
-	static: 'static/',
-	src: 'src/fonts/'
+	static: 'app/sample/static/',
+	src: 'app/sample/src/fonts/'
 };
 
 /**

@@ -6,8 +6,8 @@ const sourcemaps = require('gulp-sourcemaps');
 const less = require('gulp-less');
 
 const paths = module.exports = {
-	static: 'static/',
-	src: 'src/styles/'
+	static: 'app/sample/static/',
+	src: 'app/sample/src/styles/'
 };
 
 const onStreamError = module.exports = function(error) {
