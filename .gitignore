@@ -14,5 +14,6 @@ npm-debug.log
 *.pyc
 
 app/sample/static
-app/sample/client_secret.json
+credentials.json
 venv
+.env
